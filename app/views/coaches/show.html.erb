@@ -3,23 +3,15 @@
 <%= render @coach %>
 
 <div>
+  <% days_of_the_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %>
   
-  <h1>Monday</h1>
-  <%= day_times("Monday", @coach.appointments) %>
+  <% days_of_the_week.each do |day| %>
+    <h1><%= day %></h1>
+    <% day_times(day, @coach.appointments).each do |time| %>
+      <button><%= time %></button>
+    <% end %>
+  <% end %>
 
-
-  <h1>Tuesday</h1>
-  <%= day_times("Tuesday", @coach.appointments) %>
-  <h1>Wednesday</h1>
-  <%= day_times("Wednesday", @coach.appointments) %>
-  <h1>Thursday</h1>
-  <%= day_times("Thursday", @coach.appointments) %>
-  <h1>Friday</h1>
-  <%= day_times("Friday", @coach.appointments) %>
-  <h1>Saturday</h1>
-  <%= day_times("Saturday", @coach.appointments) %>
-  <h1>Sunday</h1>
-  <%= day_times("Sunday", @coach.appointments) %>
   <br><br>
   <%= link_to "Edit this coach", edit_coach_path(@coach) %> |
   <%= link_to "Back to coaches", coaches_path %>
