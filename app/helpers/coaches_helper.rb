@@ -1,18 +1,13 @@
 module CoachesHelper
   def day_times(day, appointments)
-    # appointments.each do |appointment| 
-    #   # if appointment.day == "Monday"
-    #     appointment.time 
-    #   # end 
-    # end
-    res = []
+    all_appointments = []
 
     appointments.each do |appointment|
       if appointment.day == day
-        res << appointment.time 
+        all_appointments << appointment.time 
       end 
     end
 
-    res
+    all_appointments
   end
 end
