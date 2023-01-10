@@ -3,9 +3,7 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments or /appointments.json
   def index
-    if (params[:user_id])
-      @user = User.find(params[:user_id])
-    end
+    @user = User.find(params[:user_id])
     @appointments = Appointment.where(user_id: params[:user_id])
   end
 

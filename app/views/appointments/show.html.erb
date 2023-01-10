@@ -5,5 +5,12 @@
 <div>
   <%= link_to "Back to appointments", user_appointments_path(@user) %>
 
-  <%= button_to "Delete this appointment", user_appointment_path(@user, @appointment), method: :delete %>
+  <%= form_with model: [@user, @appointment] do |form| %>
+    <%= form.hidden_field :user_id, value: nil %>
+    <%= form.hidden_field :coach_id %> 
+    <%= form.hidden_field :time %>
+    <%= form.hidden_field :day %>
+    <%= form.submit "Cancel appointment"%>
+  <% end %>
+  <%#= button_to "Delete this appointment", user_appointment_path(@user, @appointment), method: :delete %>
 </div>
