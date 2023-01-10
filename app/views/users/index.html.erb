@@ -2,13 +2,26 @@
 
 <h1>Choose your user or create one</h1>
 
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Select", user %>
-    </p>
-  <% end %>
-</div>
+<table class="table table-striped table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
 
-<%= link_to "Create new user", new_user_path %>
+
+
+  <tbody id="users">
+    <% @users.each do |user| %>
+      <tr>
+        <th><%= user.name %></th>
+        <th>
+          <%= link_to "Select", user %>
+        </th>
+      </tr>
+    <% end %>
+  </div>
+</table>
+
+<%= link_to "Create new user", new_user_path, class: "btn btn-secondary" %>
