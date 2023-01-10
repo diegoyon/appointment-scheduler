@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   resources :coaches
 
-  resources :appointments
+  # resources :appointments
   
   resources :users do
     resources :coaches

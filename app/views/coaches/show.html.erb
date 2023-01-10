@@ -11,7 +11,7 @@
      <% @coach.appointments.each do |appointment| %>
       <%# Show available appointments if appointment has no user %>
       <% if appointment.day == day && appointment.user_id == nil%> 
-        <%= form_with model: appointment do |form| %>
+        <%= form_with model: [@user, appointment] do |form| %>
           <%= form.text_field :user_id, value: @user.id %>
           <%= form.text_field :coach_id %> 
           <%= form.text_field :time %>

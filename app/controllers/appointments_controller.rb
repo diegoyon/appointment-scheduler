@@ -42,10 +42,11 @@ class AppointmentsController < ApplicationController
 
   # PATCH/PUT /appointments/1 or /appointments/1.json
   def update
-    @user = User.find_by(id: params[:user_id])
+    @user = User.find(params[:user_id])
+
     respond_to do |format|
       if @appointment.update(appointment_params)
-        format.html { redirect_to user_appointments_url(appointment_params[:user_id]), notice: "Appointment was successfully updated." }
+        format.html { redirect_to user_appointments_url(@user), notice: "Appointment was successfully updated." }
         format.json { render :show, status: :ok, location: @appointment }
       else
         format.html { render :edit, status: :unprocessable_entity }
