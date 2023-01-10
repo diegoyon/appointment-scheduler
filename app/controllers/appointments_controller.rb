@@ -3,7 +3,8 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments or /appointments.json
   def index
-    @appointments = Appointment.all
+    @user = User.find(params[:user_id])
+    @appointments = Appointment.where(user_id: params[:user_id])
   end
 
   # GET /appointments/1 or /appointments/1.json
@@ -12,6 +13,7 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/new
   def new
+    @user = User.find(params[:user_id])
     @appointment = Appointment.new
   end
 
@@ -21,11 +23,11 @@ class AppointmentsController < ApplicationController
 
   # POST /appointments or /appointments.json
   def create
+    @user = User.find(params[:user_id])
     @appointment = Appointment.new(appointment_params)
-
     respond_to do |format|
       if @appointment.save
-        format.html { redirect_to appointment_url(@appointment), notice: "Appointment was successfully created." }
+        format.html { redirect_to user_appointments_url(@user), notice: "Appointment was successfully created." }
         format.json { render :show, status: :created, location: @appointment }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +40,7 @@ class AppointmentsController < ApplicationController
   def update
     respond_to do |format|
       if @appointment.update(appointment_params)
-        format.html { redirect_to appointment_url(@appointment), notice: "Appointment was successfully updated." }
+        format.html { redirect_to user_appointments_url(@user), notice: "Appointment was successfully updated." }
         format.json { render :show, status: :ok, location: @appointment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,6 +67,6 @@ class AppointmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def appointment_params
-      params.require(:appointment).permit(:user_id, :coach_id, :date)
+      params.require(:appointment).permit(:user_id, :coach_id, :time)
     end
 end

@@ -6,9 +6,9 @@
   <% @appointments.each do |appointment| %>
     <%= render appointment %>
     <p>
-      <%= link_to "Show this appointment", appointment %>
+      <%= link_to "Show this appointment", user_appointment_path(@user, appointment) %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New appointment", new_appointment_path %>
+<%= link_to "New appointment", new_user_appointment_path(@user) %>

@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  resources :appointments
+  
   resources :coaches
-  resources :users
+  resources :users do 
+    resources :appointments
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "coaches#index"
+  root "users#index"
 end
