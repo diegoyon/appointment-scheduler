@@ -9,6 +9,7 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/1 or /appointments/1.json
   def show
+    @user = User.first
   end
 
   # GET /appointments/new
@@ -52,9 +53,9 @@ class AppointmentsController < ApplicationController
   # DELETE /appointments/1 or /appointments/1.json
   def destroy
     @appointment.destroy
-
+    @user = User.first
     respond_to do |format|
-      format.html { redirect_to appointments_url, notice: "Appointment was successfully destroyed." }
+      format.html { redirect_to user_appointments_url(@user), notice: "Appointment was successfully destroyed." }
       format.json { head :no_content }
     end
   end

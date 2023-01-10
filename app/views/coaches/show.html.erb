@@ -16,7 +16,18 @@
         <%= form.submit time %>
       <% end %>
     <% end %>
+
+ 
   <% end %>
+
+     <% @coach.appointments.each do |appointment| %>
+      <%= form_with model: [@coach, @appointment] do |form| %>
+        <%= form.text_field :user_id, value: User.first.id %>
+        <%= form.text_field :coach_id %> 
+        <%= form.text_field :time %>
+        <%= form.submit %>
+      <% end %>
+    <% end %>
 
   <br><br>
   <%= link_to "Edit this coach", edit_coach_path(@coach) %> |

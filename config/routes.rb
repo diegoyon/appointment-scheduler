@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   
-  resources :coaches
+  resources :coaches do 
+    resources :appointments
+  end
+  
   resources :users do 
     resources :appointments
   end
