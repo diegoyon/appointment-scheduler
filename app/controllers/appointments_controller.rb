@@ -3,13 +3,15 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments or /appointments.json
   def index
-    @user = User.find(params[:user_id])
+    if (params[:user_id])
+      @user = User.find(params[:user_id])
+    end
     @appointments = Appointment.where(user_id: params[:user_id])
   end
 
   # GET /appointments/1 or /appointments/1.json
   def show
-    @user = User.first
+    @user = User.find(params[:user_id])
   end
 
   # GET /appointments/new
@@ -20,6 +22,7 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/1/edit
   def edit
+    @user = User.find(params[:user_id])
   end
 
   # POST /appointments or /appointments.json
@@ -39,9 +42,10 @@ class AppointmentsController < ApplicationController
 
   # PATCH/PUT /appointments/1 or /appointments/1.json
   def update
+    @user = User.find_by(id: params[:user_id])
     respond_to do |format|
       if @appointment.update(appointment_params)
-        format.html { redirect_to user_appointments_url(@user), notice: "Appointment was successfully updated." }
+        format.html { redirect_to user_appointments_url(appointment_params[:user_id]), notice: "Appointment was successfully updated." }
         format.json { render :show, status: :ok, location: @appointment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +57,7 @@ class AppointmentsController < ApplicationController
   # DELETE /appointments/1 or /appointments/1.json
   def destroy
     @appointment.destroy
-    @user = User.first
+    @user = User.find(params[:user_id])
     respond_to do |format|
       format.html { redirect_to user_appointments_url(@user), notice: "Appointment was successfully destroyed." }
       format.json { head :no_content }

@@ -3,12 +3,13 @@ class CoachesController < ApplicationController
 
   # GET /coaches or /coaches.json
   def index
+    @user = User.find(params[:user_id])
     @coaches = Coach.all
   end
 
   # GET /coaches/1 or /coaches/1.json
   def show
-    @user = User.first
+    @user = User.find(params[:user_id])
     @appointment = Appointment.new
   end
 
