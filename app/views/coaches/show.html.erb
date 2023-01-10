@@ -3,12 +3,18 @@
 <%= render @coach %>
 
 <div>
+  <h1>Choose the time of your appointment</h1>
   <% days_of_the_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %>
   
   <% days_of_the_week.each do |day| %>
     <h1><%= day %></h1>
     <% day_times(day, @coach.appointments).each do |time| %>
-      <button><%= time %></button>
+      <%= form_with model: @appointment, url: user_appointments_path(@user), method: :post do |form| %>
+        <%= form.hidden_field :user_id, value: User.first.id %>
+        <%= form.hidden_field :coach_id, value: @coach.id %> 
+        <%= form.hidden_field :time, value: time %>
+        <%= form.submit time %>
+      <% end %>
     <% end %>
   <% end %>
 

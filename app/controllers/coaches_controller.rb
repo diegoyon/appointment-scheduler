@@ -8,6 +8,8 @@ class CoachesController < ApplicationController
 
   # GET /coaches/1 or /coaches/1.json
   def show
+    @user = User.first
+    @appointment = Appointment.new
   end
 
   # GET /coaches/new
